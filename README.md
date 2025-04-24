@@ -26,32 +26,45 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    <details>
    <summary>💡 <strong>Answer</strong></summary>
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,5,0:1,3,0 -m 0 -i 0 -M 0
+      
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
+
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime   5 - ioFreq   0
   Job  1: startTime   1 - runTime   3 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
@@ -99,26 +112,40 @@ The jobs complete successfully and without I/O.
    <summary>💡 <strong>Answer</strong></summary>
 
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,20,0:5,5,0 -m 0 -i 0 -M 0
+   
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
+
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  20 - ioFreq   0
   Job  1: startTime   5 - runTime   5 - ioFreq   0
 
@@ -166,30 +193,42 @@ Use the -c flag to get the exact results when you are finished.
    <summary>💡 <strong>Answer</strong></summary>
 
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 1 -l 0,10,0:10,10,0 -m 0 -i 0 -M 0
+   
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 1
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  10 - ioFreq   0
   Job  1: startTime  10 - runTime  10 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
@@ -233,32 +272,46 @@ Use the -c flag to get the exact results when you are finished.
    <summary>💡 <strong>Answer</strong></summary>
 
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -S -m 0 -i 0 -M 0
+   
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
+
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO True
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  50 - ioFreq   0
   Job  1: startTime   5 - runTime   5 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
@@ -306,38 +359,53 @@ python mlfq.py -n 2 -l 0,50,0:5,5,0 -S -m 0 -i 0 -M 0
    <summary>💡 <strong>Answer</strong></summary>
 
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -B 0 -m 0 -i 0 -M 0
+   
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
+
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  50 - ioFreq   0
   Job  1: startTime   5 - runTime   5 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
    ✅ Since the quantum length is 10 ms, Job 0 has a runtime of 50 ms, and Job 1 has a runtime of 5 ms, we can calculate how to adjust the boost frequency to ensure that Job 0 gets at least 5% of the CPU.
 
    ✅ Step 1: Calculating the Total Available CPU Time
+   
 For this system with two jobs and a quantum of 10 ms, in each run cycle, the highest-priority job receives up to 10 ms of CPU time (if it is not waiting for IO). If no boost is applied, Job 1 will execute first because it enters the system first and has a shorter runtime (5 ms). After Job 1 completes, Job 0 will receive CPU time.
 
    If we consider that Job 0 should receive at least 5% of the CPU, we calculate how many ms that would be:
@@ -346,6 +414,7 @@ For this system with two jobs and a quantum of 10 ms, in each run cycle, the hig
 So, Job 0 needs at least 2.5 ms to meet the 5% CPU usage.
 
    ✅ Step 2: Setting the Boost Frequency
+   
 In the event that Job 0 is potentially starving, we should ensure that it gets enough CPU time each cycle. If the system needs to prioritize Job 0 regularly, the -B parameter can help boost this job to the higher priority queue to prevent it from starving.
 
    You need to apply the -B parameter frequently enough so that Job 0 is not overshadowed by the shorter job, Job 1. This is achieved by applying the boost so that Job 0 receives its 5% of CPU time.
@@ -363,63 +432,90 @@ In the event that Job 0 is potentially starving, we should ensure that it gets e
    <summary>💡 <strong>Answer</strong></summary>
 
    C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -m 0 -i 0 -M 0
+   
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump False
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  50 - ioFreq   0
   Job  1: startTime   5 - runTime   5 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
 
 
 C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -I -m 0 -i 0 -M 0
+
 Here is the list of inputs:
+
 OPTIONS jobs 2
+
 OPTIONS queues 2
+
 OPTIONS allotments for queue  1 is   1
+
 OPTIONS quantum length for queue  1 is  10
+
 OPTIONS allotments for queue  0 is   1
+
 OPTIONS quantum length for queue  0 is  10
+
 OPTIONS boost 0
+
 OPTIONS ioTime 0
+
 OPTIONS stayAfterIO False
+
 OPTIONS iobump True
 
 
 For each job, three defining characteristics are given:
+
   startTime : at what time does the job enter the system
+  
   runTime   : the total CPU time needed by the job to finish
-  ioFreq    : every ioFreq time units, the job issues an I/O
-              (the I/O takes ioTime units to complete)
+  
+  ioFreq    : every ioFreq time units, the job issues an I/O (the I/O takes ioTime units to complete)
 
 Job List:
+
   Job  0: startTime   0 - runTime  50 - ioFreq   0
   Job  1: startTime   5 - runTime   5 - ioFreq   0
 
 Compute the execution trace for the given workloads.
-If you would like, also compute the response and turnaround
-times for each of the jobs.
+
+If you would like, also compute the response and turnaround times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
@@ -451,7 +547,7 @@ Without -I, job 0 returns to the back of the queue and has to wait longer for CP
    
 ---
 
-## Conclusions
+## 📌 Conclusions
 
 1. MLFQ scheduling is sensitive to parameter settings:
 
