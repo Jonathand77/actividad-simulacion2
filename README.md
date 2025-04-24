@@ -55,39 +55,39 @@ times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
-   1. Se ah ejecutado varios escenarios con dos procesos y dos colas de planificación MLFQ, limitando la duración de cada proceso a un máximo de 5 ticks y desactivando operaciones de entrada/salida (ioFreq = 0). A continuación, se presenta uno de los casos:
+   1. Several scenarios have been run with two processes and two MLFQ scheduling queues, limiting the duration of each process to a maximum of 5 ticks and disabling I/O operations (ioFreq = 0). One scenario is presented below:
 
-   ✅ Configuración:
+   ✅ ✅ Configuration:
 
-   2 colas (-n 2)
+2 queues (-n 2)
 
-   Job 0: empieza en t=0, dura 5 ticks
+Job 0: starts at t=0, lasts 5 ticks
 
-   Job 1: empieza en t=1, dura 3 ticks
+Job 1: starts at t=1, lasts 3 ticks
 
-   Sin I/O (ioFreq = 0, ioTime = 0)
+No I/O (ioFreq = 0, ioTime = 0)
 
-   Quantum = 10 en ambas colas
+Quantum = 10 in both queues
 
-   Allotment = 1 (solo un turno en cada nivel antes de bajar de prioridad)
+Allotment = 1 (only one turn at each level before demoting)
 
-   ✅ Ejecución esperada:
+✅ Waited execution:
 
-   En t=0, entra Job 0 y se ejecuta hasta t=1.
+At t=0, Job 0 enters and executes until t=1.
 
-   En t=1, llega Job 1, pero Job 0 sigue su quantum, así que Job 1 espera.
+At t=1, Job 1 arrives, but Job 0 continues its quantum, so Job 1 waits.
 
-   Job 0 agota su allotment y baja de prioridad.
+Job 0 exhausts its allocation and lowers its priority.
 
-   Job 1 sube a la cola 0, se ejecuta completamente.
+Job 1 enters queue 0 and executes completely.
 
-   Luego Job 0 se retoma y termina.
+Job 0 then resumes and terminates.
 
-   📌 Resultado:
+📌 Result:
 
-   Se observa cómo MLFQ reordena la prioridad al agotar el allotment.
+You can see how MLFQ reorders its priority when it exhausts its allocation.
 
-   Los trabajos terminan correctamente y sin I/O.
+The jobs complete successfully and without I/O.
    </details>
    <br>
    
@@ -262,39 +262,39 @@ times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
-   ✅ Para configurar una carga de trabajo en la que un trabajo aproveche las Reglas 4a y 4b y obtenga el 99% del tiempo de CPU, realicé lo siguiente:
+   ✅ To configure a workload where a job takes advantage of Rules 4a and 4b and obtains 99% of the CPU time, I performed the following:
 
-   1. Configuración de los trabajos:
+   1. Job Configuration:
 
-   ✅ Trabajo 1 (Job 0): Comienza en el tiempo 0 y tiene un tiempo de ejecución de 50 unidades de tiempo de CPU. Este trabajo no realiza operaciones de I/O (el parámetro ioFreq es 0). Al no realizar I/O, puede         aprovechar las reglas 4a y 4b, que permiten a un trabajo sin I/O obtener más tiempo de CPU.
+   ✅ Job 1 (Job 0): Starts at time 0 and has a runtime of 50 CPU time units. This job performs no I/O operations (the ioFreq parameter is 0). By not performing I/O, it can take advantage of rules 4a and 4b, which allow a job without I/O to obtain more CPU time.
 
-   ✅ Trabajo 2 (Job 1): Comienza en el tiempo 5 y tiene un tiempo de ejecución de solo 5 unidades de tiempo de CPU. Tampoco realiza I/O.
+✅ Job 2 (Job 1): Starts at time 5 and has a runtime of only 5 CPU time units. It also performs no I/O.
 
-   2. Parámetros del Scheduler:
+2. Scheduler Parameters:
 
-   ✅ Utilicé 2 colas (-n 2), donde ambos trabajos compiten por el tiempo de CPU. La cola 0 tiene mayor prioridad, lo que permite que el trabajo sin I/O (Trabajo 1) obtenga más tiempo de CPU debido a las reglas 4a y 4b.
+✅ I used two queues (-n 2), where both jobs compete for CPU time. Queue 0 has a higher priority, allowing the non-I/O job (Job 1) to get more CPU time due to rules 4a and 4b.
 
-   ✅ Activé las Reglas 4a y 4b utilizando el parámetro -S, lo que hace que los trabajos sin I/O obtengan más tiempo de CPU, ya que no son interrumpidos por operaciones de I/O.
+✅ I enabled Rules 4a and 4b using the -S parameter, which causes the non-I/O jobs to get more CPU time since they are not interrupted by I/O operations.
 
-   ✅ Establecí un tiempo de ejecución de 50 unidades para el trabajo 1, lo que le da una gran ventaja de CPU sobre el trabajo 2, que solo requiere 5 unidades.
+✅ I set a runtime of 50 units for Job 1, giving it a significant CPU advantage over Job 2, which only requires 5 units.
 
-   3. Comando utilizado:
+3. Command used:
 
-   python mlfq.py -n 2 -l 0,50,0:5,5,0 -S -m 0 -i 0 -M 0
+python mlfq.py -n 2 -l 0,50,0:5,5,0 -S -m 0 -i 0 -M 0
 
-   4. Explicación de cómo se obtiene el 99% del tiempo de CPU para el trabajo 1:
-      
-   ✅El Trabajo 1 (con un tiempo de ejecución de 50 unidades de CPU) no realiza I/O, por lo que no es interrumpido por operaciones de I/O, y puede continuar ejecutándose durante un largo período de tiempo sin ser bloqueado.
+4. Explanation of how job 1 obtains 99% of the CPU time:
 
-   ✅ Debido a las Reglas 4a y 4b activadas por el parámetro -S, el sistema prioriza el trabajo 1 para que se ejecute durante más tiempo, lo que le permite obtener 99% del tiempo de CPU en comparación con el           trabajo 2, que tiene solo 5 unidades de CPU.
+✅Job 1 (with a runtime of 50 CPUs) does not perform I/O, so it is not interrupted by I/O operations and can continue running for an extended period without being blocked.
 
-   5. Resultado esperado:
-      
-   ✅ Trabajo 1: Utiliza casi todo el tiempo de CPU, ya que no realiza I/O y se beneficia de las reglas antiguas, obteniendo alrededor del 99% del tiempo de CPU.
+✅ Due to Rules 4a and 4b triggered by the -S parameter, the system prioritizes job 1 to run longer, allowing it to obtain 99% of the CPU time compared to job 2, which has only 5 CPUs.
 
-   ✅ Trabajo 2: Utiliza solo una pequeña fracción del tiempo de CPU (aproximadamente el 1%), debido a su corto tiempo de ejecución y a que no interfiere significativamente con el Trabajo 1.
+5. Expected Result:
 
-   📌 Este comportamiento demuestra cómo un trabajo puede "aprovechar" el planificador mediante el uso de las Reglas 4a y 4b para obtener la mayor parte del tiempo de CPU, logrando así el objetivo de obtener el 99% del tiempo de CPU durante el intervalo de ejecución.
+✅ Job 1: Uses almost all of the CPU time, as it does not perform I/O and benefits from the legacy rules, obtaining around 99% of the CPU time.
+
+✅ Job 2: Uses only a small fraction of the CPU time (approximately 1%) due to its short execution time and the fact that it does not significantly interfere with Job 1.
+
+📌 This behavior demonstrates how a job can "leverage" the scheduler by using Rules 4a and 4b to obtain the majority of the CPU time, thereby achieving the goal of obtaining 99% of the CPU time during the execution interval.
    </details>
    <br>
    
@@ -335,23 +335,23 @@ times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
-   ✅ Dado que la longitud del quantum es de 10 ms, el trabajo Job 0 tiene un tiempo de ejecución de 50 ms, y Job 1 tiene un tiempo de ejecución de 5 ms, podemos calcular cómo ajustar la frecuencia del "boosting" para garantizar que Job 0 obtenga al menos el 5% de la CPU.
+   ✅ Since the quantum length is 10 ms, Job 0 has a runtime of 50 ms, and Job 1 has a runtime of 5 ms, we can calculate how to adjust the boost frequency to ensure that Job 0 gets at least 5% of the CPU.
 
-   ✅ Paso 1: Cálculo del tiempo total disponible en la CPU
-   Para este sistema con 2 trabajos y un quantum de 10 ms, en cada ciclo de ejecución el trabajo de más alta prioridad recibe hasta 10 ms de CPU (si no está esperando IO). Si no se hace ningún boost, Job 1 se   ejecutará en primer lugar, debido a que entra al sistema primero y su tiempo de ejecución es más corto (5 ms). Después de completar Job 1, Job 0 recibirá tiempo de CPU.
+   ✅ Step 1: Calculating the Total Available CPU Time
+For this system with two jobs and a quantum of 10 ms, in each run cycle, the highest-priority job receives up to 10 ms of CPU time (if it is not waiting for IO). If no boost is applied, Job 1 will execute first because it enters the system first and has a shorter runtime (5 ms). After Job 1 completes, Job 0 will receive CPU time.
 
-   Si consideramos que Job 0 debería recibir al menos el 5% de la CPU, calculamos cuántos ms serían:
+   If we consider that Job 0 should receive at least 5% of the CPU, we calculate how many ms that would be:
 
-   \text{5% de 50 ms} = 0.05 \times 50 = 2.5 \, \text{ms}
-   Entonces, Job 0 necesita al menos 2.5 ms para cumplir con el 5% de uso de la CPU.
+\text{5% of 50 ms} = 0.05 \times 50 = 2.5 \, \text{ms}
+So, Job 0 needs at least 2.5 ms to meet the 5% CPU usage.
 
-   ✅ Paso 2: Establecimiento de la frecuencia de "boosting"
-   En el caso de que Job 0 esté potencialmente "starving", deberíamos asegurarnos de que obtenga suficiente tiempo de CPU en cada ciclo. Si el sistema tiene que darle prioridad a Job 0 regularmente, el parámetro -B puede ayudar a "boostear" este trabajo hacia la cola de mayor prioridad para evitar que se quede sin CPU.
+   ✅ Step 2: Setting the Boost Frequency
+In the event that Job 0 is potentially starving, we should ensure that it gets enough CPU time each cycle. If the system needs to prioritize Job 0 regularly, the -B parameter can help boost this job to the higher priority queue to prevent it from starving.
 
-   Tienes que aplicar el -B con la frecuencia necesaria para que Job 0 no sea eclipsado por el trabajo más corto, Job 1. Esto se logra aplicando el "boost" de manera que Job 0 reciba su 5% de tiempo de CPU.
+   You need to apply the -B parameter frequently enough so that Job 0 is not overshadowed by the shorter job, Job 1. This is achieved by applying the boost so that Job 0 receives its 5% of CPU time.
 
    📌 Conclusión:
-   Para garantizar que Job 0 obtenga al menos el 5% de la CPU: Tendrás que realizar un "boost" de Job 0 regularmente, utilizando el parámetro -B. En tu caso, con un quantum de 10 ms, aplicar el "boost" con la suficiente frecuencia hará que Job 0 no se quede sin CPU.
+   To ensure that Job 0 gets at least 5% of the CPU: You'll need to boost Job 0 regularly, using the -B parameter. In your case, with a 10 ms quantum, applying the boost frequently enough will ensure that Job 0 doesn't run out of CPU.
    </details>
    <br>
    
@@ -423,29 +423,29 @@ times for each of the jobs.
 
 Use the -c flag to get the exact results when you are finished.
       
-   ✅ El flag -I (--iobump) en el simulador controla en qué parte de la cola se inserta un proceso que acaba de terminar una operación de I/O. Por defecto, los procesos se agregan al final de su cola de prioridad, pero al usar -I, el proceso que regresa de I/O se agrega al principio de la cola, dándole así una oportunidad más inmediata de ejecutarse.
+   ✅ The -I (--iobump) flag in the simulator controls where a process that has just completed an I/O operation is inserted into the queue. By default, processes are added to the end of their priority queue, but using -I adds the process returning from I/O to the front of the queue, giving it a more immediate opportunity to execute.
 
-   Para observar el efecto de este flag, es necesario usar cargas de trabajo que incluyan operaciones de entrada/salida (I/O). En mis pruebas iniciales usé:
+   To observe the effect of this flag, it is necessary to use workloads that include input/output (I/O) operations. In my initial tests, I used:
 
-   python mlfq.py -n 2 -l 0,50,0:5,5,0 -m 0 -i 0 -M 0
-   python mlfq.py -n 2 -l 0,50,0:5,5,0 -I -m 0 -i 0 -M 0
+python mlfq.py -n 2 -l 0,50,0:5,5,0 -m 0 -i 0 -M 0
+python mlfq.py -n 2 -l 0,50,0:5,5,0 -I -m 0 -i 0 -M 0
 
-   Sin embargo, en esos casos los trabajos no hacen I/O (ioFreq = 0), por lo tanto, el flag -I no tuvo ningún efecto observable.
+However, in those cases, the jobs do no I/O (ioFreq = 0), so the -I flag had no observable effect.
 
-   Para ver realmente el efecto, probé con un nuevo escenario donde al menos un trabajo hace I/O frecuentemente:
+To really see the effect, I tried a new scenario where at least one job performs I/O frequently:
 
-   python mlfq.py -n 2 -l 0,50,10:5,5,0 -i 5 -M 0
-   python mlfq.py -n 2 -l 0,50,10:5,5,0 -I -i 5 -M 0
+python mlfq.py -n 2 -l 0,50,10:5,5,0 -i 5 -M 0
+python mlfq.py -n 2 -l 0,50,10:5,5,0 -I -i 5 -M 0
 
-   ✅ En este nuevo caso:
+   ✅ In this new case:
 
-   El trabajo 0 hace I/O cada 10 unidades de tiempo.
+   Job 0 performs I/O every 10 time units.
 
-   Con -I, se ve que cuando el trabajo 0 regresa del I/O, se ejecuta más rápidamente porque es puesto al frente de la cola.
+With -I, you can see that when job 0 returns from I/O, it executes faster because it is moved to the front of the queue.
 
-   Sin -I, el trabajo 0 regresa al final de la cola y tiene que esperar más para obtener CPU.
+Without -I, job 0 returns to the back of the queue and has to wait longer for CPU.
 
-   📌 El flag -I puede ayudar a reducir el tiempo de espera de los procesos que realizan I/O frecuente, lo cual es beneficioso en sistemas interactivos donde se busca que los procesos que esperan por I/O respondan rápido.
+   📌 The -I flag can help reduce the wait time of processes that perform frequent I/O, which is beneficial in interactive systems where you want processes waiting for I/O to respond quickly.
    </details>
    <br>
    
@@ -453,35 +453,35 @@ Use the -c flag to get the exact results when you are finished.
 
 ## Conclusions
 
-La planificación MLFQ es sensible a la configuración de los parámetros:
+1. MLFQ scheduling is sensitive to parameter settings:
 
-La cantidad de colas, la longitud de los quantums y las asignaciones (allotments) por nivel de cola impactan directamente la prioridad y el tiempo de CPU que recibe cada proceso.
+   - The number of queues, the length of the quanta, and the allocations per queue level directly impact the priority and CPU time each process receives.
 
-El refuerzo periódico (-B) es esencial para evitar inanición:
+2. Periodic boosting (-B) is essential to avoid starvation:
 
-Cuando se tiene un trabajo de larga duración y otros cortos, sin -B, los trabajos cortos pueden monopolizar la CPU, dejando al largo sin oportunidad.
+   - When you have a long-running job and short-running jobs, without -B, the short jobs can monopolize the CPU, leaving the long ones without a chance.
 
-Al usar un refuerzo con -B cada cierto tiempo, los trabajos de baja prioridad vuelven a subir a la cola más alta, garantizando equidad y evitando inanición.
+   - By periodically boosting with -B, low-priority jobs are pushed back to the highest queue, ensuring fairness and avoiding starvation.
 
-Por ejemplo, se concluyó que para garantizar que un trabajo reciba al menos el 5% del CPU, el valor del boost debe estar cuidadosamente calculado en función del total de CPU consumido.
+   - For example, it was concluded that to ensure a job receives at least 5% of the CPU, the boost value must be carefully calculated based on the total CPU consumed.
 
-La manipulación de la cola mediante el flag -I afecta significativamente a trabajos con I/O:
+3. Queue manipulation using the -I flag significantly affects jobs with I/O:
 
-Cuando un proceso termina una operación de I/O:
+   - When a process completes an I/O operation:
 
-Sin -I, regresa al final de la cola, lo que puede causar más latencia.
+      - Without -I, it returns to the end of the queue, which can cause more latency.
 
-Con -I, regresa al inicio, obteniendo CPU de inmediato, lo cual mejora el rendimiento de procesos interactivos.
+      - With -I, it returns to the beginning, gaining CPU immediately, which improves the performance of interactive processes.
 
-Esto es útil para sistemas donde se necesita alta responsividad (como interfaces de usuario o servidores interactivos).
+   - This is useful for systems where high responsiveness is required (such as user interfaces or interactive servers).
 
-Los procesos sin I/O no se ven afectados por el flag -I:
+4. Processes without I/O are not affected by the -I flag:
 
-En simulaciones donde los procesos no hacen I/O (ioFreq = 0), el uso del flag -I no tiene ningún efecto, lo cual fue verificado empíricamente en tus pruebas.
+   - In simulations where processes do not perform I/O (ioFreq = 0), using the -I flag has no effect, which was empirically verified in your tests.
 
-La simulación con diferentes cargas de trabajo es clave para entender el comportamiento real:
+5. Simulation with different workloads is key to understanding real-world behavior:
 
-A través de pruebas con distintas combinaciones de tiempos de llegada, duración y frecuencia de I/O, se pudo observar cómo MLFQ ajusta dinámicamente las prioridades y tiempos de ejecución.
+   - Through tests with different combinations of arrival times, duration, and I/O frequency, we were able to observe how MLFQ dynamically adjusts priorities and execution times.
 
 ### Criterios de evaluación
 - [x] Despligue de los resultados y analisis claro de los resultados respecto a lo visto en la teoria.
