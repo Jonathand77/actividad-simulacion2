@@ -25,6 +25,36 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,5,0:1,3,0 -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime   5 - ioFreq   0
+  Job  1: startTime   1 - runTime   3 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+      
    1. Se ah ejecutado varios escenarios con dos procesos y dos colas de planificación MLFQ, limitando la duración de cada proceso a un máximo de 5 ticks y desactivando operaciones de entrada/salida (ioFreq = 0). A continuación, se presenta uno de los casos:
 
    ✅ Configuración:
@@ -67,6 +97,37 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,20,0:5,5,0 -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  20 - ioFreq   0
+  Job  1: startTime   5 - runTime   5 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+   
    1. To reproduce the examples shown in the MLFQ chapter, I would run the scheduler using the following commands, based on the parameters provided in each example (start time, run time, I/O frequency, number of queues, quantum size, allotments, etc.). Here's one example:
 
    📘 Example from the chapter:
@@ -103,6 +164,35 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 1 -l 0,10,0:10,10,0 -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 1
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  10 - ioFreq   0
+  Job  1: startTime  10 - runTime  10 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+      
    ✅ To configure the MLFQ scheduler to behave like a Round-Robin Scheduler, I would use the following configuration:
 
    Single Queue (-n 1): In a round-robin scheduler, all jobs are treated equally, so they should all be placed in a single queue. This ensures that no job is promoted or demoted to another queue.
@@ -141,6 +231,37 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -S -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO True
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  50 - ioFreq   0
+  Job  1: startTime   5 - runTime   5 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+      
    ✅ Para configurar una carga de trabajo en la que un trabajo aproveche las Reglas 4a y 4b y obtenga el 99% del tiempo de CPU, realicé lo siguiente:
 
    1. Configuración de los trabajos:
@@ -183,6 +304,37 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -B 0 -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  50 - ioFreq   0
+  Job  1: startTime   5 - runTime   5 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+      
    ✅ Dado que la longitud del quantum es de 10 ms, el trabajo Job 0 tiene un tiempo de ejecución de 50 ms, y Job 1 tiene un tiempo de ejecución de 5 ms, podemos calcular cómo ajustar la frecuencia del "boosting" para garantizar que Job 0 obtenga al menos el 5% de la CPU.
 
    ✅ Paso 1: Cálculo del tiempo total disponible en la CPU
@@ -209,6 +361,68 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
    
    <details>
    <summary>💡 <strong>Answer</strong></summary>
+
+   C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump False
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  50 - ioFreq   0
+  Job  1: startTime   5 - runTime   5 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+
+
+C:\Documentos\GitHub\actividad-simulacion2>python mlfq.py -n 2 -l 0,50,0:5,5,0 -I -m 0 -i 0 -M 0
+Here is the list of inputs:
+OPTIONS jobs 2
+OPTIONS queues 2
+OPTIONS allotments for queue  1 is   1
+OPTIONS quantum length for queue  1 is  10
+OPTIONS allotments for queue  0 is   1
+OPTIONS quantum length for queue  0 is  10
+OPTIONS boost 0
+OPTIONS ioTime 0
+OPTIONS stayAfterIO False
+OPTIONS iobump True
+
+
+For each job, three defining characteristics are given:
+  startTime : at what time does the job enter the system
+  runTime   : the total CPU time needed by the job to finish
+  ioFreq    : every ioFreq time units, the job issues an I/O
+              (the I/O takes ioTime units to complete)
+
+Job List:
+  Job  0: startTime   0 - runTime  50 - ioFreq   0
+  Job  1: startTime   5 - runTime   5 - ioFreq   0
+
+Compute the execution trace for the given workloads.
+If you would like, also compute the response and turnaround
+times for each of the jobs.
+
+Use the -c flag to get the exact results when you are finished.
+      
    ✅ El flag -I (--iobump) en el simulador controla en qué parte de la cola se inserta un proceso que acaba de terminar una operación de I/O. Por defecto, los procesos se agregan al final de su cola de prioridad, pero al usar -I, el proceso que regresa de I/O se agrega al principio de la cola, dándole así una oportunidad más inmediata de ejecutarse.
 
    Para observar el efecto de este flag, es necesario usar cargas de trabajo que incluyan operaciones de entrada/salida (I/O). En mis pruebas iniciales usé:
@@ -239,7 +453,35 @@ This program, [mlfq.py](mlfq.py), allows you to see how the MLFQ scheduler prese
 
 ## Conclusions
 
-Coloque aqui las conclusiones...
+La planificación MLFQ es sensible a la configuración de los parámetros:
+
+La cantidad de colas, la longitud de los quantums y las asignaciones (allotments) por nivel de cola impactan directamente la prioridad y el tiempo de CPU que recibe cada proceso.
+
+El refuerzo periódico (-B) es esencial para evitar inanición:
+
+Cuando se tiene un trabajo de larga duración y otros cortos, sin -B, los trabajos cortos pueden monopolizar la CPU, dejando al largo sin oportunidad.
+
+Al usar un refuerzo con -B cada cierto tiempo, los trabajos de baja prioridad vuelven a subir a la cola más alta, garantizando equidad y evitando inanición.
+
+Por ejemplo, se concluyó que para garantizar que un trabajo reciba al menos el 5% del CPU, el valor del boost debe estar cuidadosamente calculado en función del total de CPU consumido.
+
+La manipulación de la cola mediante el flag -I afecta significativamente a trabajos con I/O:
+
+Cuando un proceso termina una operación de I/O:
+
+Sin -I, regresa al final de la cola, lo que puede causar más latencia.
+
+Con -I, regresa al inicio, obteniendo CPU de inmediato, lo cual mejora el rendimiento de procesos interactivos.
+
+Esto es útil para sistemas donde se necesita alta responsividad (como interfaces de usuario o servidores interactivos).
+
+Los procesos sin I/O no se ven afectados por el flag -I:
+
+En simulaciones donde los procesos no hacen I/O (ioFreq = 0), el uso del flag -I no tiene ningún efecto, lo cual fue verificado empíricamente en tus pruebas.
+
+La simulación con diferentes cargas de trabajo es clave para entender el comportamiento real:
+
+A través de pruebas con distintas combinaciones de tiempos de llegada, duración y frecuencia de I/O, se pudo observar cómo MLFQ ajusta dinámicamente las prioridades y tiempos de ejecución.
 
 ### Criterios de evaluación
 - [x] Despligue de los resultados y analisis claro de los resultados respecto a lo visto en la teoria.
